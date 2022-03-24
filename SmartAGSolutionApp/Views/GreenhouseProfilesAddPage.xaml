@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SmartAGSolutionApp.Views.GreenhouseProfilesAddPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:SmartAGSolutionApp.ViewModels"
+    Title="{Binding Title}"
+    x:DataType="viewmodels:GreenhouseProfilesAddPageViewModel">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <ScrollView Grid.Row="0">
+                <StackLayout
+                    Padding="30,24,30,24"
+                    Orientation="Vertical"
+                    Spacing="10">
+                    <Label FontSize="Title" Text="Name:" />
+                    <Entry
+                        x:Name="name"
+                        ClearButtonVisibility="WhileEditing"
+                        Placeholder="Enter greenhouse name"
+                        Text="{Binding NewName, Mode=TwoWay}" />
+                    <Label FontSize="Title" Text="Phone number:" />
+                    <Entry
+                        x:Name="phoneNumber"
+                        ClearButtonVisibility="WhileEditing"
+                        Placeholder="Enter greenhouse phone number"
+                        Text="{Binding NewPhoneNumber, Mode=TwoWay}" />
+                    <Label FontSize="Title" Text="Description:" />
+                    <Entry
+                        x:Name="description"
+                        ClearButtonVisibility="WhileEditing"
+                        Placeholder="Enter description"
+                        Text="{Binding NewDescription, Mode=TwoWay}" />
+                    <Button
+                        Margin="0,10,0,0"
+                        BackgroundColor="{StaticResource Primary}"
+                        Command="{Binding AddGreenhouseProfileCommand}"
+                        Text="Add Greenhouse profile"
+                        TextColor="White" />
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

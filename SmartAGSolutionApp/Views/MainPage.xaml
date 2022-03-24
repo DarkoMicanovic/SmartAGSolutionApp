@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SmartAGSolutionApp.Views.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:SmartAGSolutionApp.ViewModels"
+    Title="{Binding Title}"
+    x:DataType="viewmodels:MainPageViewModel">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding GreenhouseProfilesCommand}" IconImageSource="greenhouse.png" />
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackLayout
+            BackgroundColor="Ivory"
+            HorizontalOptions="Fill"
+            VerticalOptions="FillAndExpand">
+            <StackLayout
+                HorizontalOptions="Center"
+                Orientation="Horizontal"
+                VerticalOptions="Center">
+                <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
+                    <Image
+                        HeightRequest="256"
+                        Source="logo_transparent.png"
+                        VerticalOptions="Center" />
+                </ContentView>
+            </StackLayout>
+        </StackLayout>
+        <ScrollView Grid.Row="1">
+            <StackLayout
+                Padding="30,24,30,24"
+                Orientation="Vertical"
+                Spacing="10">
+                <Label FontSize="Title" Text="Measurements" />
+                <Label
+                    Padding="0,0,0,0"
+                    FontSize="16"
+                    Text="Click on the button to get latest measurements." />
+                <Button
+                    Margin="0,10,0,0"
+                    BackgroundColor="{StaticResource Primary}"
+                    Command="{Binding GetLatestMeasurementCommand}"
+                    Text="Get latest Measurements"
+                    TextColor="White" />
+                <Label FontSize="Title" Text="History" />
+                <Label
+                    Padding="0,0,0,0"
+                    FontSize="16"
+                    Text="Click on the button to list latest measurements." />
+                <Button
+                    Margin="0,10,0,0"
+                    BackgroundColor="{StaticResource Primary}"
+                    Command="{Binding ListLatestMeasurementsCommand}"
+                    Text="List latest Measurements"
+                    TextColor="White" />
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

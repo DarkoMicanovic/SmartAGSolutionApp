@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SmartAGSolutionApp.Views.GreenhouseProfilesPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:SmartAGSolutionApp.ViewModels"
+    x:Name="collection"
+    Title="{Binding Title}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding AddGreenhouseProfilesCommand}" IconImageSource="greenhouseAdd.png" />
+    </ContentPage.ToolbarItems>
+    <ListView
+        x:Name="listView"
+        HasUnevenRows="True"
+        ItemsSource="{Binding GreenhouseCollection}"
+        SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+        SeparatorColor="Gray">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <ViewCell.ContextActions>
+                        <MenuItem
+                            x:DataType="viewmodels:GreenhouseProfilesPageViewModel"
+                            Command="{Binding DeleteSelectedGreenHouseProfileCommand}"
+                            Text="Delete" />
+                        <MenuItem Text="Modify" />
+                    </ViewCell.ContextActions>
+                    <Grid Padding="7">
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="greenhouseProfile.png" WidthRequest="128" />
+                            <StackLayout Padding="5">
+                                <Label FontSize="Large" Text="{Binding Name}" />
+                                <Label FontSize="Medium" Text="{Binding PhoneNumber}" />
+                                <Label Text="{Binding Description}" />
+                            </StackLayout>
+                        </StackLayout>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+        <ListView.Behaviors />
+    </ListView>
+</ContentPage>

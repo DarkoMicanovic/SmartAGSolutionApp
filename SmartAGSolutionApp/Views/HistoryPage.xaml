@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SmartAGSolutionApp.Views.HistoryPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:SmartAGSolutionApp.ViewModels"
+    Title="{Binding Title}"
+    x:DataType="viewmodel:HistoryPageViewModel">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{Binding ActiveGreenhouseProfileName, Mode=TwoWay}" />
+        <ToolbarItem Command="{Binding OpenChartCommand}" IconImageSource="graph.png" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid Padding="15">
+            <Frame
+                Grid.Row="0"
+                Grid.Column="0"
+                IsClippedToBounds="True">
+                <Image
+                    Aspect="Fill"
+                    Source="soilHumidity.png"
+                    VerticalOptions="Center" />
+            </Frame>
+            <Frame
+                Grid.Row="0"
+                Grid.Column="1"
+                IsClippedToBounds="True">
+                <Image
+                    Aspect="Fill"
+                    Source="soilTemperature.png"
+                    VerticalOptions="Center" />
+            </Frame>
+            <Frame
+                Grid.Row="1"
+                Grid.Column="0"
+                IsClippedToBounds="True">
+                <Image
+                    Aspect="Fill"
+                    Source="airHumidity.png"
+                    VerticalOptions="Center" />
+            </Frame>
+            <Frame
+                Grid.Row="1"
+                Grid.Column="1"
+                IsClippedToBounds="True">
+                <Image
+                    Aspect="Fill"
+                    Source="airTemperature.png"
+                    VerticalOptions="Center" />
+            </Frame>
+            <Frame
+                Grid.Row="2"
+                Grid.Column="0"
+                IsClippedToBounds="True">
+                <Image
+                    Aspect="Fill"
+                    Source="illuminance.png"
+                    VerticalOptions="Center" />
+            </Frame>
+            <Frame
+                Grid.Row="2"
+                Grid.Column="1"
+                IsClippedToBounds="True">
+                <Image
+                    Aspect="Fill"
+                    Source="lumen.png"
+                    VerticalOptions="Center" />
+            </Frame>
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Style="{StaticResource PropertyNameLabelStyle}"
+                Text="Humidity:" />
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Style="{StaticResource PropertyValueLabelStyle}"
+                Text="{Binding HumitidyString}" />
+            <Label
+                Grid.Row="0"
+                Grid.Column="1"
+                Style="{StaticResource PropertyNameLabelStyle}"
+                Text="Temperature:"
+                TextColor="Ivory" />
+            <Label
+                Grid.Row="0"
+                Grid.Column="1"
+                Style="{StaticResource PropertyValueLabelStyle}"
+                Text="{Binding TemperatureString, Mode=TwoWay}"
+                TextColor="Ivory" />
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Style="{StaticResource PropertyNameLabelStyle}"
+                Text="Air Humidity:" />
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Style="{StaticResource PropertyValueLabelStyle}"
+                Text="{Binding AirHumitidyString}" />
+            <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Style="{StaticResource PropertyNameLabelStyle}"
+                Text="Air Temperature:" />
+            <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Style="{StaticResource PropertyValueLabelStyle}"
+                Text="{Binding AirTemperatureString}" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Style="{StaticResource PropertyNameLabelStyle}"
+                Text="Illuminance:" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Style="{StaticResource PropertyValueLabelStyle}"
+                Text="{Binding IlluminanceString}" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="1"
+                Style="{StaticResource PropertyNameLabelStyle}"
+                Text="Lumen:" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="1"
+                Style="{StaticResource PropertyValueLabelStyle}"
+                Text="{Binding LumenString}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

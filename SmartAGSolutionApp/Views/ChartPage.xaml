@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SmartAGSolutionApp.Views.ChartPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+    xmlns:viewmodels="clr-namespace:SmartAGSolutionApp.ViewModels"
+    Title="{Binding Title}"
+    Padding="15"
+    x:DataType="viewmodels:ChartPageViewModel"
+    Background="{StaticResource Primary}"
+    IsTabStop="True">
+    <ContentPage.Content>
+        <Grid>
+            <Frame
+                Grid.Row="0"
+                Grid.Column="0"
+                IsClippedToBounds="True">
+                <StackLayout>
+                    <Label
+                        Style="{StaticResource PropertyNameLabelStyle}"
+                        Text="Humidty:"
+                        TextColor="Gray" />
+                    <microcharts:ChartView Chart="{Binding HumidityChart}" VerticalOptions="FillAndExpand" />
+                </StackLayout>
+            </Frame>
+            <Frame
+                Grid.Row="0"
+                Grid.Column="1"
+                IsClippedToBounds="True">
+                <StackLayout>
+                    <Label
+                        Style="{StaticResource PropertyNameLabelStyle}"
+                        Text="Temperature:"
+                        TextColor="Gray" />
+                    <microcharts:ChartView Chart="{Binding TemperatureChart}" VerticalOptions="FillAndExpand" />
+                </StackLayout>
+            </Frame>
+            <Frame
+                Grid.Row="1"
+                Grid.Column="0"
+                IsClippedToBounds="True">
+                <StackLayout>
+                    <Label
+                        Style="{StaticResource PropertyNameLabelStyle}"
+                        Text="Air Humidty:"
+                        TextColor="Gray" />
+                    <microcharts:ChartView Chart="{Binding AirHumidityChart}" VerticalOptions="FillAndExpand" />
+                </StackLayout>
+            </Frame>
+            <Frame
+                Grid.Row="1"
+                Grid.Column="1"
+                IsClippedToBounds="True">
+                <StackLayout>
+                    <Label
+                        Style="{StaticResource PropertyNameLabelStyle}"
+                        Text="Air Temperature:"
+                        TextColor="Gray" />
+                    <microcharts:ChartView Chart="{Binding AirTemperatureChart}" VerticalOptions="FillAndExpand" />
+                </StackLayout>
+            </Frame>
+            <Frame
+                Grid.Row="2"
+                Grid.Column="0"
+                IsClippedToBounds="True">
+                <StackLayout>
+                    <Label
+                        Style="{StaticResource PropertyNameLabelStyle}"
+                        Text="Illuminance:"
+                        TextColor="Gray" />
+                    <microcharts:ChartView Chart="{Binding IlluminanceChart}" VerticalOptions="FillAndExpand" />
+                </StackLayout>
+            </Frame>
+            <Frame
+                Grid.Row="2"
+                Grid.Column="1"
+                IsClippedToBounds="True">
+                <StackLayout>
+                    <Label
+                        Style="{StaticResource PropertyNameLabelStyle}"
+                        Text="Lumen:"
+                        TextColor="Gray" />
+                    <microcharts:ChartView Chart="{Binding LumenChart}" VerticalOptions="FillAndExpand" />
+                </StackLayout>
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
