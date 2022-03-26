@@ -74,7 +74,7 @@ namespace SmartAGSolutionApp.Data
             {
                 using (StreamWriter writer = new StreamWriter(writerFileStream))
                 {
-                    foreach (Measurement item in this.measurementQueue)
+                    foreach (Measurement item in this.measurementQueue.Reverse())
                     {
                         string line = $"{item.Temperature}:{item.Humidity}:{item.AirTemperature}:{item.AirHumidity}:{item.Illuminance}:{item.Lumen}";
                         writer.WriteLine(line);
