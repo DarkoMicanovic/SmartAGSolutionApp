@@ -15,8 +15,7 @@ namespace SmartAGSolutionApp.Views
     {
         public GreenhouseProfilesPage()
         {
-            InitializeComponent();
-
+            this.InitializeComponent();
         }
     }
 }

@@ -21,8 +21,8 @@ namespace SmartAGSolutionApp.ViewModels
 
             Title = "Select greenhouse profile";
             this.GreenhouseCollection = this.dataProvider.GetGreenhouseCollection();
-            this.AddGreenhouseProfilesCommand = new DelegateCommand(() => AddGreenhouse());
-            this.DeleteSelectedGreenHouseProfileCommand = new DelegateCommand(() => DeleteSelectedGreenHouseProfile());
+            this.AddGreenhouseProfilesCommand = new DelegateCommand(() => this.AddGreenhouse());
+            this.DeleteSelectedGreenHouseProfileCommand = new DelegateCommand<string>((greenhouseName) => this.DeleteSelectedGreenHouseProfile(greenhouseName));
 
         }
 
@@ -30,14 +30,14 @@ namespace SmartAGSolutionApp.ViewModels
         
         public DelegateCommand AddGreenhouseProfilesCommand { get; set; }
 
-        public DelegateCommand DeleteSelectedGreenHouseProfileCommand { get; set; }
+        public DelegateCommand<string> DeleteSelectedGreenHouseProfileCommand { get; set; }
 
         public ObservableCollection<Greenhouse> GreenhouseCollection { get; set; }
 
         public Greenhouse SelectedItem
         {
             get { return this.activeGreenhouse; }
-            set 
+            set
             {
                 SetProperty(ref this.activeGreenhouse, value);
                 this.dataProvider.SetActiveGreenhouse(this.activeGreenhouse);
@@ -65,9 +65,10 @@ namespace SmartAGSolutionApp.ViewModels
             
         }
 
-        private void DeleteSelectedGreenHouseProfile()
+        private void DeleteSelectedGreenHouseProfile(string greenhouseName)
         {
-            this.dataProvider.RemoveGreenhouse(this.SelectedItem);
+            this.dataProvider.RemoveGreenhouse(greenhouseName);
+            this.navigationService.GoBackAsync();
         }
     }
 }

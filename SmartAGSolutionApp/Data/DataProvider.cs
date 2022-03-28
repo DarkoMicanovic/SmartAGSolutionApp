@@ -251,14 +251,24 @@ namespace SmartAGSolutionApp.Data
             }
         }
 
-        public void RemoveGreenhouse(Greenhouse greenhouse)
+        public void RemoveGreenhouse(string greenhouseName)
         {
-            this.greenhouseCollection.Remove(greenhouse);
+            Greenhouse currentGreenhouse = this.greenhouseCollection.FirstOrDefault(item => item.Name == greenhouseName);
+            if (currentGreenhouse != null)
+                this.greenhouseCollection.Remove(currentGreenhouse);
 
-            if (this.greenhouseCollection.Count != 0)
+            if (!this.greenhouseCollection.Contains(this.activeGreenhouse))
+            {
                 this.SetActiveGreenhouse(this.greenhouseCollection[0]);
-            else
+                return;
+            }
+            else if (this.greenhouseCollection.Count == 0)
+            {
                 this.SetActiveGreenhouse(new Greenhouse());
+                return;
+            }
+
+            this.SerializeGreenhouses();
         }
 
         public IEnumerable<ChartEntry> GetTemperatureChartEntries()
