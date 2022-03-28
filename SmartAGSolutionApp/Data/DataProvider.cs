@@ -74,7 +74,7 @@ namespace SmartAGSolutionApp.Data
             {
                 using (StreamWriter writer = new StreamWriter(writerFileStream))
                 {
-                    foreach (Measurement item in this.measurementQueue.Reverse())
+                    foreach (Measurement item in this.measurementQueue)
                     {
                         string line = $"{item.Temperature}:{item.Humidity}:{item.AirTemperature}:{item.AirHumidity}:{item.Illuminance}:{item.Lumen}";
                         writer.WriteLine(line);
@@ -147,7 +147,7 @@ namespace SmartAGSolutionApp.Data
                 }
             }
 
-            this.measurement = this.measurementQueue.Count != 0 ? this.measurementQueue.Peek() : new Measurement();
+            this.measurement = this.measurementQueue.Count != 0 ? this.measurementQueue.Last() : new Measurement();
             this.UpdateCharts();
         }
 
