@@ -21,7 +21,7 @@ namespace SmartAGSolutionApp.Data
 
         void AddGreenhouse(Greenhouse greenhouse);
 
-        void RemoveGreenhouse(Greenhouse greenhouse);
+        void RemoveGreenhouse(string greenhouseName);
 
         IEnumerable<ChartEntry> GetTemperatureChartEntries();
 
