@@ -231,8 +231,7 @@ namespace SmartAGSolutionApp.Data
         public void AddGreenhouse(Greenhouse greenhouse)
         {
             this.greenhouseCollection.Add(greenhouse);
-            this.ActiveGreenhouse = greenhouseCollection.Last();
-            this.Serialize();
+            this.SetActiveGreenhouse(greenhouse);
         }
 
         public ObservableCollection<Greenhouse> GetGreenhouseCollection()
