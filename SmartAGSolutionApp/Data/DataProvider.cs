@@ -193,6 +193,8 @@ namespace SmartAGSolutionApp.Data
 
                         if (string.Equals(args[0], "active_greenhouse") && this.greenhouseCollection.Any(item => string.Equals(item.Name, args[1])))
                             this.activeGreenhouse = this.greenhouseCollection.Where(item => string.Equals(item.Name, args[1])).FirstOrDefault();
+                        else if (string.Equals(args[0], "active_greenhouse") && string.Equals(args[1], string.Empty))
+                            this.activeGreenhouse = new Greenhouse();
                     }
                 }
             }
@@ -241,29 +243,32 @@ namespace SmartAGSolutionApp.Data
 
         public void SetActiveGreenhouse(Greenhouse greenhouse)
         {
-            if (this.greenhouseCollection.Contains(greenhouse))
-            {
+            if (this.greenhouseCollection.Contains(greenhouse) || string.Equals(string.Empty, greenhouse.Name))
                 this.ActiveGreenhouse = greenhouse;
-                this.DeserializeMeasurements();
-                this.SerializeGreenhouses();
-                this.SerializeAppInformation();
-            }
+            this.DeserializeMeasurements();
+            this.SerializeGreenhouses();
+            this.SerializeAppInformation();
         }
 
         public void RemoveGreenhouse(string greenhouseName)
         {
             Greenhouse currentGreenhouse = this.greenhouseCollection.FirstOrDefault(item => item.Name == greenhouseName);
             if (currentGreenhouse != null)
-                this.greenhouseCollection.Remove(currentGreenhouse);
-
-            if (!this.greenhouseCollection.Contains(this.activeGreenhouse))
             {
-                this.SetActiveGreenhouse(this.greenhouseCollection[0]);
-                return;
+                this.greenhouseCollection.Remove(currentGreenhouse);
+                string fileName = $"{this.activeGreenhouse.Name}.msnt";
+                string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), fileName);
+                File.Delete(filePath);
             }
-            else if (this.greenhouseCollection.Count == 0)
+
+            if (this.greenhouseCollection.Count == 0)
             {
                 this.SetActiveGreenhouse(new Greenhouse());
+                return;
+            }
+            else if (!this.greenhouseCollection.Contains(this.activeGreenhouse))
+            {
+                this.SetActiveGreenhouse(this.greenhouseCollection[0]);
                 return;
             }
 
