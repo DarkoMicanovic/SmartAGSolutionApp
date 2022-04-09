@@ -6,31 +6,46 @@ namespace SmartAGSolutionApp.Model
 {
     public class Greenhouse
     {
+        private Guid id;
+
         public Greenhouse()
         {
-            PhoneNumber = Name = Description = string.Empty;
+            this.id = default;
+            this.PhoneNumber = this.Name = this.Description = string.Empty;
         }
 
         public Greenhouse(string phoneNumber, string name, string description)
         {
-            PhoneNumber = phoneNumber;
-            Name = name;
-            Description = description;
+            this.id = Guid.NewGuid();
+            this.PhoneNumber = phoneNumber;
+            this.Name = name;
+            this.Description = description;
         }
 
         public override bool Equals(object obj)
         {
             if (obj is Greenhouse)
-                return ((Greenhouse)obj).Name == this.Name && ((Greenhouse)obj).PhoneNumber == this.PhoneNumber;
+                return ((Greenhouse)obj).ID == this.ID;
             return false;
         }
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return this.id.GetHashCode();
         }
 
         #region Properties
+
+        public Guid ID
+        {
+            get { return this.id; }
+            set { this.id = value; }
+        }
+
+        public string IDString
+        {
+            get { return this.id.ToString(); }
+        }
 
         public string PhoneNumber { get; set; }
 
@@ -40,5 +55,11 @@ namespace SmartAGSolutionApp.Model
 
         #endregion
 
+        public void Update(string name, string phoneNumber, string description)
+        {
+            this.Name = name;
+            this.PhoneNumber = phoneNumber;
+            this.Description = description;
+        }
     }
 }
