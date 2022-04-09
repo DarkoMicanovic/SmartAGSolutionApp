@@ -40,16 +40,16 @@ namespace SmartAGSolutionApp.ViewModels
         async void GetLatestMeasurements()
         {
             var parameters = new NavigationParameters();
-            var rnd = new Random();
-            double temperature = Math.Round(rnd.NextDouble() * 3 + 4, 2);
-            double humidity = Math.Round(rnd.NextDouble() * 60 + 30  , 2);
-            double airTemperature = Math.Round(rnd.NextDouble() * 3 + 4, 2);
-            double airHumidity = Math.Round(rnd.NextDouble() * 60 + 30, 2);
-            double illuminance = Math.Round(rnd.NextDouble() * 50 + 300, 2);
-            double lumen = Math.Round(rnd.NextDouble() * 80 + 100, 2);
+            var random = new Random();
+            double temperature = Math.Round(random.NextDouble() * 3 + 4, 2);
+            double humidity = Math.Round(random.NextDouble() * 60 + 30  , 2);
+            double airTemperature = Math.Round(random.NextDouble() * 3 + 4, 2);
+            double airHumidity = Math.Round(random.NextDouble() * 60 + 30, 2);
+            double illuminance = Math.Round(random.NextDouble() * 50 + 300, 2);
+            double lumen = Math.Round(random.NextDouble() * 80 + 100, 2);
             parameters.Add(nameof(Measurement), new Measurement(temperature, humidity, airHumidity, airTemperature, illuminance, lumen));
 
-            await navigationService.NavigateAsync("HistoryPage", parameters);
+            await this.navigationService.NavigateAsync("HistoryPage", parameters);
         }
 
         private void ListLatestMeasurements()
@@ -59,12 +59,12 @@ namespace SmartAGSolutionApp.ViewModels
                 Application.Current.MainPage.DisplayAlert("Information", "Greenhouse profile is not selected.", "Ok");
                 return;
             }
-            navigationService.NavigateAsync("HistoryPage");
+            this.navigationService.NavigateAsync("HistoryPage");
         }
 
         private void GreenhouseProfiles()
         {
-            navigationService.NavigateAsync("GreenhouseProfilesPage");
+            this.navigationService.NavigateAsync("GreenhouseProfilesPage");
         }
     }
 }

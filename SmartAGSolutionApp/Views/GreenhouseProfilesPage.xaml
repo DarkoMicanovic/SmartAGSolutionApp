@@ -19,10 +19,13 @@
                 <ViewCell>
                     <ViewCell.ContextActions>
                         <MenuItem
-                            Command="{Binding Source={x:Reference ProfilesView}, Path=BindingContext.DeleteSelectedGreenHouseProfileCommand}"
+                            Command="{Binding Source={x:Reference ProfilesView}, Path=BindingContext.DeleteSelectedGreenhouseProfileCommand}"
                             CommandParameter="{Binding Name}"
                             Text="Delete" />
-                        <MenuItem Text="Modify" />
+                        <MenuItem
+                            Command="{Binding Source={x:Reference ProfilesView}, Path=BindingContext.ModifySelectedGreenhouseProfileCommand}"
+                            CommandParameter="{Binding IDString}"
+                            Text="Modify" />
                     </ViewCell.ContextActions>
                     <Grid Padding="7">
                         <StackLayout Orientation="Horizontal">

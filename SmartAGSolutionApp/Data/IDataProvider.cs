@@ -1,5 +1,6 @@
 ﻿using Microcharts;
 using SmartAGSolutionApp.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -17,11 +18,16 @@ namespace SmartAGSolutionApp.Data
 
         Greenhouse ActiveGreenhouse { get; set; }
 
+        Guid FindGreenhouse(Guid id);
+
         void SetActiveGreenhouse(Greenhouse greenhouse);
 
         void AddGreenhouse(Greenhouse greenhouse);
 
         void RemoveGreenhouse(string greenhouseName);
+
+        void ApplyModify(Greenhouse greenhouse);
+
 
         IEnumerable<ChartEntry> GetTemperatureChartEntries();
 

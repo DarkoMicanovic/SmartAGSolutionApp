@@ -7,7 +7,6 @@ using Prism.Mvvm;
 using SmartAGSolutionApp.Model;
 using SkiaSharp;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SmartAGSolutionApp.Data
 {
@@ -24,8 +23,8 @@ namespace SmartAGSolutionApp.Data
         private List<ChartEntry> lumenChartEntries;
         private Queue<Measurement> measurementQueue;
 
-        public DataProvider(){
-
+        public DataProvider()
+        {
             this.measurementQueue = new Queue<Measurement>();
             this.greenhouseCollection = new ObservableCollection<Greenhouse>();
             this.temperatureChartEntries = new List<ChartEntry>();
@@ -93,7 +92,7 @@ namespace SmartAGSolutionApp.Data
                 {
                     foreach (Greenhouse item in this.greenhouseCollection)
                     {
-                        string line = $"{item.PhoneNumber}:{item.Name}:{item.Description}";
+                        string line = $"{item.ID}:{item.PhoneNumber}:{item.Name}:{item.Description}";
                         writer.WriteLine(line);
                     }
                 }
@@ -166,7 +165,7 @@ namespace SmartAGSolutionApp.Data
                     while ((line = reader.ReadLine()) != null)
                     {
                         string[] args = line.Split(':');
-                        this.greenhouseCollection.Add(new Greenhouse(args[0], args[1], args[2]));
+                        this.greenhouseCollection.Add(new Greenhouse(args[1], args[2], args[3]) { ID = new Guid(args[0]) });
                     }
                 }
             }
@@ -241,6 +240,11 @@ namespace SmartAGSolutionApp.Data
             return this.greenhouseCollection;
         }
 
+        public Guid FindGreenhouse(Guid id)
+        {
+            return this.greenhouseCollection.FirstOrDefault(greenhouse => greenhouse.ID == id).ID;
+        }
+
         public void SetActiveGreenhouse(Greenhouse greenhouse)
         {
             if (this.greenhouseCollection.Contains(greenhouse) || string.Equals(string.Empty, greenhouse.Name))
@@ -262,15 +266,17 @@ namespace SmartAGSolutionApp.Data
             }
 
             if (this.greenhouseCollection.Count == 0)
-            {
                 this.SetActiveGreenhouse(new Greenhouse());
-                return;
-            }
             else if (!this.greenhouseCollection.Contains(this.activeGreenhouse))
-            {
                 this.SetActiveGreenhouse(this.greenhouseCollection[0]);
-                return;
-            }
+
+            this.SerializeGreenhouses();
+        }
+
+        public void ApplyModify(Greenhouse greenhouseUpdate)
+        {
+            foreach (Greenhouse greenhouse in this.greenhouseCollection.Where(greenhouse => greenhouse.ID == greenhouseUpdate.ID))
+                greenhouse.Update(greenhouseUpdate.Name, greenhouseUpdate.PhoneNumber, greenhouseUpdate.Description);
 
             this.SerializeGreenhouses();
         }
