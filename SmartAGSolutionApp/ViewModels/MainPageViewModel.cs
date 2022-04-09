@@ -39,6 +39,12 @@ namespace SmartAGSolutionApp.ViewModels
 
         async void GetLatestMeasurements()
         {
+            if (this.DataProvider.ActiveGreenhouse.ID == default)
+            {
+                Application.Current.MainPage?.DisplayAlert("Information", "Greenhouse profile is not selected.", "Ok");
+                return;
+            }
+
             var parameters = new NavigationParameters();
             var random = new Random();
             double temperature = Math.Round(random.NextDouble() * 3 + 4, 2);
@@ -54,9 +60,9 @@ namespace SmartAGSolutionApp.ViewModels
 
         private void ListLatestMeasurements()
         {
-            if (this.DataProvider.ActiveGreenhouse.Name == string.Empty)
+            if (this.DataProvider.ActiveGreenhouse.ID == default)
             {
-                Application.Current.MainPage.DisplayAlert("Information", "Greenhouse profile is not selected.", "Ok");
+                Application.Current.MainPage?.DisplayAlert("Information", "Greenhouse profile is not selected.", "Ok");
                 return;
             }
             this.navigationService.NavigateAsync("HistoryPage");
