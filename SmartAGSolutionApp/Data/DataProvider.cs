@@ -34,10 +34,6 @@ namespace SmartAGSolutionApp.Data
             this.illuminanceChartEntries = new List<ChartEntry>();
             this.lumenChartEntries = new List<ChartEntry>();
 
-            string[] temp = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.Personal));
-            //foreach (var file in temp)
-            //    File.Delete(file);
-
             this.Deserialize();
         }
 
@@ -247,7 +243,7 @@ namespace SmartAGSolutionApp.Data
 
         public void SetActiveGreenhouse(Greenhouse greenhouse)
         {
-            if (this.greenhouseCollection.Contains(greenhouse) || string.Equals(string.Empty, greenhouse.Name))
+            if (this.greenhouseCollection.Contains(greenhouse) || greenhouse.ID == default)
                 this.ActiveGreenhouse = greenhouse;
             this.DeserializeMeasurements();
             this.SerializeGreenhouses();
@@ -279,6 +275,24 @@ namespace SmartAGSolutionApp.Data
                 greenhouse.Update(greenhouseUpdate.Name, greenhouseUpdate.PhoneNumber, greenhouseUpdate.Description);
 
             this.SerializeGreenhouses();
+        }
+
+        public void ClearCache()
+        {
+            string[] cachedFiles = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.Personal));
+            foreach (var file in cachedFiles)
+                File.Delete(file);
+
+            this.measurementQueue.Clear();
+            this.greenhouseCollection.Clear();
+            this.temperatureChartEntries.Clear();
+            this.humidityChartEntries.Clear();
+            this.airTemperatureChartEntries.Clear();
+            this.airHumidityChartEntries.Clear();
+            this.illuminanceChartEntries.Clear();
+            this.lumenChartEntries.Clear();
+
+            this.Deserialize();
         }
 
         public IEnumerable<ChartEntry> GetTemperatureChartEntries()

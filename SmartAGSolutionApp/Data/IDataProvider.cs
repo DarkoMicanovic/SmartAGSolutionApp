@@ -28,6 +28,7 @@ namespace SmartAGSolutionApp.Data
 
         void ApplyModify(Greenhouse greenhouse);
 
+        void ClearCache();
 
         IEnumerable<ChartEntry> GetTemperatureChartEntries();
 

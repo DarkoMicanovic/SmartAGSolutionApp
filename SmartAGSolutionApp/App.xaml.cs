@@ -34,6 +34,7 @@ namespace SmartAGSolutionApp
             containerRegistry.RegisterForNavigation<GreenhouseProfilesPage, GreenhouseProfilesPageViewModel>();
             containerRegistry.RegisterForNavigation<GreenhouseProfilesAddPage, GreenhouseProfilesAddPageViewModel>();
             containerRegistry.RegisterForNavigation<ChartPage, ChartPageViewModel>();
+            containerRegistry.RegisterForNavigation<SettingsPage, SettingsPageViewModel>();
         }
     }
 }

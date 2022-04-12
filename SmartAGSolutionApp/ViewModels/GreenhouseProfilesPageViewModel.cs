@@ -76,14 +76,12 @@ namespace SmartAGSolutionApp.ViewModels
         private void AddGreenhouse()
         {
             this.navigationService.NavigateAsync("GreenhouseProfilesAddPage");
-            
         }
 
         private void DeleteSelectedGreenhouseProfile(string greenhouseName)
         {
             this.dataProvider.RemoveGreenhouse(greenhouseName);
-            this.ReloadGreenhouseCollection();
-            //this.navigationService.GoBackAsync();
+            this.navigationService.GoBackAsync();
         }
 
         private void ModifySelectedGreenhouseProfile(string id)
