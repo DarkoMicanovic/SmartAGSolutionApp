@@ -58,7 +58,7 @@ namespace SmartAGSolutionApp.ViewModels
 
             CO2Chart = new LineChart()
             {
-                Entries = dataProvider.GetLumenChartEntries(),
+                Entries = dataProvider.GetCO2ChartEntries(),
                 LineSize = 6,
                 LineMode = LineMode.Straight,
                 PointMode = PointMode.Circle,

@@ -20,7 +20,7 @@ namespace SmartAGSolutionApp.Data
         private List<ChartEntry> airTemperatureChartEntries;
         private List<ChartEntry> airHumidityChartEntries;
         private List<ChartEntry> illuminanceChartEntries;
-        private List<ChartEntry> lumenChartEntries;
+        private List<ChartEntry> co2ChartEntries;
         private Queue<Measurement> measurementQueue;
 
         public DataProvider()
@@ -32,7 +32,7 @@ namespace SmartAGSolutionApp.Data
             this.airTemperatureChartEntries = new List<ChartEntry>();
             this.airHumidityChartEntries = new List<ChartEntry>();
             this.illuminanceChartEntries = new List<ChartEntry>();
-            this.lumenChartEntries = new List<ChartEntry>();
+            this.co2ChartEntries = new List<ChartEntry>();
 
             this.Deserialize();
         }
@@ -44,7 +44,7 @@ namespace SmartAGSolutionApp.Data
             this.airTemperatureChartEntries.Clear();
             this.airHumidityChartEntries.Clear();
             this.illuminanceChartEntries.Clear();
-            this.lumenChartEntries.Clear();
+            this.co2ChartEntries.Clear();
 
             foreach (Measurement item in this.measurementQueue)
             {
@@ -53,7 +53,7 @@ namespace SmartAGSolutionApp.Data
                 this.airTemperatureChartEntries.Add(new ChartEntry((float)item.AirTemperature) { Color = new SKColor(0xd5b400) });
                 this.airHumidityChartEntries.Add(new ChartEntry((float)item.AirHumidity) { Color = new SKColor(0xd5b400) });
                 this.illuminanceChartEntries.Add(new ChartEntry((float)item.Illuminance) { Color = new SKColor(0xd5b400) });
-                this.lumenChartEntries.Add(new ChartEntry((float)item.CO2) { Color = new SKColor(0xd5b400) });
+                this.co2ChartEntries.Add(new ChartEntry((float)item.CO2) { Color = new SKColor(0xd5b400) });
             }
         }
 
@@ -290,7 +290,7 @@ namespace SmartAGSolutionApp.Data
             this.airTemperatureChartEntries.Clear();
             this.airHumidityChartEntries.Clear();
             this.illuminanceChartEntries.Clear();
-            this.lumenChartEntries.Clear();
+            this.co2ChartEntries.Clear();
 
             this.Deserialize();
         }
@@ -320,9 +320,9 @@ namespace SmartAGSolutionApp.Data
             return this.illuminanceChartEntries;
         }
 
-        public IEnumerable<ChartEntry> GetLumenChartEntries()
+        public IEnumerable<ChartEntry> GetCO2ChartEntries()
         {
-            return this.lumenChartEntries;
+            return this.co2ChartEntries;
         }
 
         public void Serialize()
