@@ -8,6 +8,7 @@
     x:DataType="viewmodels:MainPageViewModel">
     <ContentPage.ToolbarItems>
         <ToolbarItem Command="{Binding GreenhouseProfilesCommand}" IconImageSource="greenhouse.png" />
+        <ToolbarItem Command="{Binding SettingsCommand}" IconImageSource="settings.png" />
     </ContentPage.ToolbarItems>
     <Grid>
         <Grid.RowDefinitions>

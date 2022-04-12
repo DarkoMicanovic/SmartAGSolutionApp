@@ -21,10 +21,11 @@ namespace SmartAGSolutionApp.ViewModels
         {
             this.navigationService = navigationService;
 
-            Title = "Smart AG Solution";
-            GetLatestMeasurementCommand = new DelegateCommand(() => GetLatestMeasurements());
-            ListLatestMeasurementsCommand = new DelegateCommand(() => ListLatestMeasurements());
-            GreenhouseProfilesCommand = new DelegateCommand(() => GreenhouseProfiles());
+            this.Title = "Smart AG Solution";
+            this.GetLatestMeasurementCommand = new DelegateCommand(() => GetLatestMeasurements());
+            this.ListLatestMeasurementsCommand = new DelegateCommand(() => ListLatestMeasurements());
+            this.GreenhouseProfilesCommand = new DelegateCommand(() => GreenhouseProfiles());
+            this.SettingsCommand = new DelegateCommand(() => Settings());
         }
 
         #region Properties
@@ -34,7 +35,9 @@ namespace SmartAGSolutionApp.ViewModels
         public DelegateCommand GetLatestMeasurementCommand { get; set; }
 
         public DelegateCommand ListLatestMeasurementsCommand { get; set; }
-        
+
+        public DelegateCommand SettingsCommand { get; set; }
+
         #endregion
 
         async void GetLatestMeasurements()
@@ -71,6 +74,11 @@ namespace SmartAGSolutionApp.ViewModels
         private void GreenhouseProfiles()
         {
             this.navigationService.NavigateAsync("GreenhouseProfilesPage");
+        }
+
+        private void Settings()
+        {
+            this.navigationService.NavigateAsync("SettingsPage");
         }
     }
 }
