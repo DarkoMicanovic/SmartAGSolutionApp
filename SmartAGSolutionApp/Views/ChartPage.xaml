@@ -79,9 +79,9 @@
                 <StackLayout>
                     <Label
                         Style="{StaticResource PropertyNameLabelStyle}"
-                        Text="Lumen:"
+                        Text="CO2:"
                         TextColor="Gray" />
-                    <microcharts:ChartView Chart="{Binding LumenChart}" VerticalOptions="FillAndExpand" />
+                    <microcharts:ChartView Chart="{Binding CO2Chart}" VerticalOptions="FillAndExpand" />
                 </StackLayout>
             </Frame>
         </Grid>
