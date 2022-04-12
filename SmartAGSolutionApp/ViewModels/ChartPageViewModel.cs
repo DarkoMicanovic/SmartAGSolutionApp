@@ -56,9 +56,9 @@ namespace SmartAGSolutionApp.ViewModels
                 PointMode = PointMode.Circle,
             };
 
-            LumenChart = new LineChart()
+            CO2Chart = new LineChart()
             {
-                Entries = dataProvider.GetLumenChartEntries(),
+                Entries = dataProvider.GetCO2ChartEntries(),
                 LineSize = 6,
                 LineMode = LineMode.Straight,
                 PointMode = PointMode.Circle,
@@ -77,7 +77,7 @@ namespace SmartAGSolutionApp.ViewModels
 
         public Chart IlluminanceChart { get; set; }
 
-        public Chart LumenChart { get; set; }
+        public Chart CO2Chart { get; set; }
 
         #endregion
     }

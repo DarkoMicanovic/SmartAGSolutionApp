@@ -40,7 +40,7 @@ namespace SmartAGSolutionApp.Data
 
         IEnumerable<ChartEntry> GetIlluminanceChartEntries();
 
-        IEnumerable<ChartEntry> GetLumenChartEntries();
+        IEnumerable<ChartEntry> GetCO2ChartEntries();
 
         void Serialize();
 
