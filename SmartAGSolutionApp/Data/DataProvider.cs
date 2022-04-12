@@ -53,7 +53,7 @@ namespace SmartAGSolutionApp.Data
                 this.airTemperatureChartEntries.Add(new ChartEntry((float)item.AirTemperature) { Color = new SKColor(0xd5b400) });
                 this.airHumidityChartEntries.Add(new ChartEntry((float)item.AirHumidity) { Color = new SKColor(0xd5b400) });
                 this.illuminanceChartEntries.Add(new ChartEntry((float)item.Illuminance) { Color = new SKColor(0xd5b400) });
-                this.lumenChartEntries.Add(new ChartEntry((float)item.Lumen) { Color = new SKColor(0xd5b400) });
+                this.lumenChartEntries.Add(new ChartEntry((float)item.CO2) { Color = new SKColor(0xd5b400) });
             }
         }
 
@@ -71,7 +71,7 @@ namespace SmartAGSolutionApp.Data
                 {
                     foreach (Measurement item in this.measurementQueue)
                     {
-                        string line = $"{item.Temperature}:{item.Humidity}:{item.AirTemperature}:{item.AirHumidity}:{item.Illuminance}:{item.Lumen}";
+                        string line = $"{item.Temperature}:{item.Humidity}:{item.AirTemperature}:{item.AirHumidity}:{item.Illuminance}:{item.CO2}";
                         writer.WriteLine(line);
                     }
                 }
@@ -215,7 +215,7 @@ namespace SmartAGSolutionApp.Data
             this.measurement.AirTemperature = measurement.AirTemperature;
             this.measurement.AirHumidity = measurement.AirHumidity;
             this.measurement.Illuminance = measurement.Illuminance;
-            this.measurement.Lumen = measurement.Lumen;
+            this.measurement.CO2 = measurement.CO2;
 
             this.measurementQueue.Enqueue(measurement);
             if (this.measurementQueue.Count > 5)

@@ -12,7 +12,7 @@ namespace SmartAGSolutionApp.ViewModels
     {
         private IDataProvider dataProvider;
         private INavigationService navigationService;
-        private string temperatureString, humidityString, airTemperatureString, airHumidityString, illuminanceString, lumenString;
+        private string temperatureString, humidityString, airTemperatureString, airHumidityString, illuminanceString, lumenString, co2;
 
         public HistoryPageViewModel(INavigationService navigationService, IDataProvider dataProvider)
             : base(navigationService, dataProvider)
@@ -65,6 +65,12 @@ namespace SmartAGSolutionApp.ViewModels
             set { SetProperty(ref this.lumenString, value); }
         }
 
+        public string CO2String
+        {
+            get { return this.co2; }
+            set { SetProperty(ref this.co2, value); }
+        }
+
         public string ActiveGreenhouseProfileName
         {
             get { return this.dataProvider.ActiveGreenhouse.Name; }
@@ -85,7 +91,9 @@ namespace SmartAGSolutionApp.ViewModels
             this.AirTemperatureString = $"{latestMeasurement.AirTemperature}\xB0 C";
             this.AirHumitidyString = $"{latestMeasurement.AirHumidity} %";
             this.IlluminanceString = $"{latestMeasurement.Illuminance}";
-            this.LumenString = $"{latestMeasurement.Lumen}";
+            double lumen = Math.Round(latestMeasurement.Illuminance / 683.0, 2);
+            this.LumenString = $"{lumen}";
+            this.CO2String = $"{latestMeasurement.CO2}";
         }
 
         #region IInitialize Members
