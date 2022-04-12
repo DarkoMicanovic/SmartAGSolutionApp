@@ -63,7 +63,7 @@
                 IsClippedToBounds="True">
                 <Image
                     Aspect="Fill"
-                    Source="lumen.png"
+                    Source="co2.png"
                     VerticalOptions="Center" />
             </Frame>
             <Label
@@ -113,21 +113,26 @@
                 Grid.Column="0"
                 Style="{StaticResource PropertyNameLabelStyle}"
                 Text="Illuminance:" />
-            <Label
-                Grid.Row="2"
-                Grid.Column="0"
-                Style="{StaticResource PropertyValueLabelStyle}"
-                Text="{Binding IlluminanceString}" />
+            <StackLayout Grid.Row="2" Grid.Column="0">
+                <Label
+                    Margin="0,40,0,0"
+                    Style="{StaticResource PropertyValueLabelStyle}"
+                    Text="{Binding IlluminanceString}" />
+                <Label
+                    Margin="0,0,0,35"
+                    Style="{StaticResource PropertyValueLabelStyle}"
+                    Text="{Binding LumenString}" />
+            </StackLayout>
             <Label
                 Grid.Row="2"
                 Grid.Column="1"
                 Style="{StaticResource PropertyNameLabelStyle}"
-                Text="Lumen:" />
+                Text="CO2:" />
             <Label
                 Grid.Row="2"
                 Grid.Column="1"
                 Style="{StaticResource PropertyValueLabelStyle}"
-                Text="{Binding LumenString}" />
+                Text="{Binding CO2String}" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>
