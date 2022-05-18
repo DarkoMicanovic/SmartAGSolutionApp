@@ -3,6 +3,7 @@ using Prism.Navigation;
 using SmartAGSolutionApp.Data;
 using SmartAGSolutionApp.Model;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
 
@@ -75,6 +76,8 @@ namespace SmartAGSolutionApp.ViewModels
                 this.NewPhoneNumber = greenhouse.PhoneNumber;
                 this.NewDescription = greenhouse.Description;
             }
+            else
+                this.CanEdit = true;
         }
 
         #endregion
@@ -82,12 +85,23 @@ namespace SmartAGSolutionApp.ViewModels
         private void AddGreenhouseProfile()
         {
             if (string.IsNullOrEmpty(this.NewPhoneNumber) || string.IsNullOrEmpty(this.NewName))
+            {
                 Application.Current.MainPage.DisplayAlert("Warning", "Name or phone number field cannot be emtpy", "Ok");
+                return;
+            }
+
+            IEnumerable<string> greenhousesNameCollection = this.dataProvider.GetGreenhouseCollection().Select(greenhouse => greenhouse.Name.Trim().ToLower());
+
+            if (this.canEdit && greenhousesNameCollection.Contains(this.NewName.Trim().ToLower()))
+            {
+                Application.Current.MainPage.DisplayAlert("Warning", "Greenhouse profile with similar name already exists.", "Ok");
+                return;
+            }
             else if (this.canEdit)
                 this.dataProvider.AddGreenhouse(new Greenhouse(this.NewPhoneNumber, this.NewName, this.NewDescription));
             else
             {
-                Guid greenhouseID  = this.dataProvider.FindGreenhouse(Guid.Parse(this.id));
+                Guid greenhouseID = this.dataProvider.FindGreenhouse(Guid.Parse(this.id));
                 this.dataProvider.ApplyModify(new Greenhouse(this.NewPhoneNumber, this.NewName, this.NewDescription) { ID = greenhouseID });
             }
 
