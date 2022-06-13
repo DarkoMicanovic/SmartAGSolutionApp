@@ -1,8 +1,10 @@
 using Prism;
 using Prism.Ioc;
 using SmartAGSolutionApp.Data;
+using SmartAGSolutionApp.Resources;
 using SmartAGSolutionApp.ViewModels;
 using SmartAGSolutionApp.Views;
+using Xamarin.CommunityToolkit.Helpers;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Essentials.Interfaces;
 using Xamarin.Forms;
@@ -19,6 +21,8 @@ namespace SmartAGSolutionApp
         protected override async void OnInitialized()
         {
             InitializeComponent();
+
+            LocalizationResourceManager.Current.Init(Resource.ResourceManager);
 
             await NavigationService.NavigateAsync("NavigationPage/MainPage");
         }

@@ -22,6 +22,7 @@ namespace SmartAGSolutionApp.Data
         private List<ChartEntry> illuminanceChartEntries;
         private List<ChartEntry> co2ChartEntries;
         private Queue<Measurement> measurementQueue;
+        private LanguageSelectionType languageSelectionType;
 
         public DataProvider()
         {
@@ -103,8 +104,10 @@ namespace SmartAGSolutionApp.Data
             {
                 using (StreamWriter writer = new StreamWriter(writerFileStream))
                 {
-                    string line = $"active_greenhouse:{this.activeGreenhouse.Name}";
-                    writer.WriteLine(line);
+                    string activeGreenhouse = $"active_greenhouse:{this.activeGreenhouse.Name}";
+                    writer.WriteLine(activeGreenhouse);
+                    string selectedLanguage = $"selected_language:{this.languageSelectionType}";
+                    writer.WriteLine(selectedLanguage);
                 }
             }
         }
@@ -167,13 +170,14 @@ namespace SmartAGSolutionApp.Data
             }
         }
 
-        public void DeseraliAppInformation()
+        public void DeserializeAppInformation()
         {
             string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "app.info");
 
             if (!File.Exists(filePath))
             {
                 this.activeGreenhouse = new Greenhouse();
+                this.languageSelectionType = LanguageSelectionType.English;
                 return;
             }
 
@@ -190,6 +194,8 @@ namespace SmartAGSolutionApp.Data
                             this.activeGreenhouse = this.greenhouseCollection.Where(item => string.Equals(item.Name, args[1])).FirstOrDefault();
                         else if (string.Equals(args[0], "active_greenhouse") && string.Equals(args[1], string.Empty))
                             this.activeGreenhouse = new Greenhouse();
+                        if (string.Equals(args[0], "selected_language"))
+                            this.SetLanguageSelectionType(args[1]);
                     }
                 }
             }
@@ -201,6 +207,16 @@ namespace SmartAGSolutionApp.Data
         {
             get { return this.activeGreenhouse; }
             set { SetProperty(ref this.activeGreenhouse, value); }
+        }
+
+        public LanguageSelectionType SelectedLanguage
+        {
+            get { return this.languageSelectionType; }
+            set 
+            {
+                SetProperty(ref this.languageSelectionType, value);
+                this.SerializeAppInformation();
+            }
         }
 
         public Measurement GetMeasurement()
@@ -343,12 +359,25 @@ namespace SmartAGSolutionApp.Data
             this.DeserializeGreenhouses();
 
             //APP INFORMATION:
-            this.DeseraliAppInformation();
+            this.DeserializeAppInformation();
 
             //MEASUREMENT LIST:
             this.DeserializeMeasurements();
         }
 
         #endregion
+
+        void SetLanguageSelectionType(string selectedLanguage)
+        {
+            if (selectedLanguage == "Serbian")
+                this.languageSelectionType = LanguageSelectionType.Serbian;
+            else if (selectedLanguage == "English")
+                this.languageSelectionType = LanguageSelectionType.English;
+        }
+        }
+    public enum LanguageSelectionType
+    {
+        Serbian = 0,
+        English = 1
     }
 }

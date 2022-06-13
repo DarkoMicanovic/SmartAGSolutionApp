@@ -4,14 +4,43 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodels="clr-namespace:SmartAGSolutionApp.ViewModels"
-    Title="{Binding Title}"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    Title="{xct:Translate Settings}"
     x:DataType="viewmodels:SettingsPageViewModel">
     <ContentPage.Content>
         <StackLayout Padding="10">
+            <AbsoluteLayout HorizontalOptions="Center">
+                <StackLayout Padding="10" Orientation="Horizontal">
+                    <Frame
+                        x:Name="fSerbianFlag"
+                        BackgroundColor="{Binding SerbianLanguageIsSelectedColor}"
+                        CornerRadius="5">
+                        <ImageButton
+                            x:Name="imgbtnSerbianFlag"
+                            Margin="5"
+                            Clicked="ImgbtnSerbianFlag_Clicked"
+                            Command="{Binding SerbianLanguageSelectedCommand}"
+                            Source="flag_sr"
+                            WidthRequest="64" />
+                    </Frame>
+                    <Frame
+                        x:Name="fUSAFlag"
+                        BackgroundColor="{Binding EnglishLanguageIsSelectedColor}"
+                        CornerRadius="5">
+                        <ImageButton
+                            x:Name="imgbtnUSAFlag"
+                            Margin="5"
+                            Clicked="ImgbtnUSAFlag_Clicked"
+                            Command="{Binding EnglishLanguageSelectedCommand}"
+                            Source="flag_us"
+                            WidthRequest="64" />
+                    </Frame>
+                </StackLayout>
+            </AbsoluteLayout>
             <Button
                 Command="{Binding ClearCacheCommand}"
                 HorizontalOptions="CenterAndExpand"
-                Text="Clear cached files" />
+                Text="{xct:Translate Clear_cached_files}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

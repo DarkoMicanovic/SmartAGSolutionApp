@@ -4,7 +4,8 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodels="clr-namespace:SmartAGSolutionApp.ViewModels"
-    Title="{Binding Title}"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    Title="{xct:Translate Smart_AG_Solution}"
     x:DataType="viewmodels:MainPageViewModel">
     <ContentPage.ToolbarItems>
         <ToolbarItem Command="{Binding GreenhouseProfilesCommand}" IconImageSource="greenhouse.png" />
@@ -36,27 +37,27 @@
                 Padding="30,24,30,24"
                 Orientation="Vertical"
                 Spacing="10">
-                <Label FontSize="Title" Text="Measurements" />
+                <Label FontSize="Title" Text="{xct:Translate Measurements}" />
                 <Label
                     Padding="0,0,0,0"
                     FontSize="16"
-                    Text="Click on the button to get latest measurements." />
+                    Text="{xct:Translate Click_on_the_button_to_get_latest_measurements}" />
                 <Button
                     Margin="0,10,0,0"
                     BackgroundColor="{StaticResource Primary}"
                     Command="{Binding GetLatestMeasurementCommand}"
-                    Text="Get latest Measurements"
+                    Text="{xct:Translate Get_latest_measurements}"
                     TextColor="White" />
-                <Label FontSize="Title" Text="History" />
+                <Label FontSize="Title" Text="{xct:Translate History}" />
                 <Label
                     Padding="0,0,0,0"
                     FontSize="16"
-                    Text="Click on the button to list latest measurements." />
+                    Text="{xct:Translate Click_on_the_button_to_list_latest_measurements}" />
                 <Button
                     Margin="0,10,0,0"
                     BackgroundColor="{StaticResource Primary}"
                     Command="{Binding ListLatestMeasurementsCommand}"
-                    Text="List latest Measurements"
+                    Text="{xct:Translate List_latest_Measurements}"
                     TextColor="White" />
             </StackLayout>
         </ScrollView>

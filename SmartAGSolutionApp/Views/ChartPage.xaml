@@ -5,7 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
     xmlns:viewmodels="clr-namespace:SmartAGSolutionApp.ViewModels"
-    Title="{Binding Title}"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    Title="{xct:Translate Measurements_overview}"
     Padding="15"
     x:DataType="viewmodels:ChartPageViewModel"
     Background="{StaticResource Primary}"
@@ -19,7 +20,7 @@
                 <StackLayout>
                     <Label
                         Style="{StaticResource PropertyNameLabelStyle}"
-                        Text="Humidty:"
+                        Text="{xct:Translate Humidity}"
                         TextColor="Gray" />
                     <microcharts:ChartView Chart="{Binding HumidityChart}" VerticalOptions="FillAndExpand" />
                 </StackLayout>
@@ -31,7 +32,7 @@
                 <StackLayout>
                     <Label
                         Style="{StaticResource PropertyNameLabelStyle}"
-                        Text="Temperature:"
+                        Text="{xct:Translate Temperature}"
                         TextColor="Gray" />
                     <microcharts:ChartView Chart="{Binding TemperatureChart}" VerticalOptions="FillAndExpand" />
                 </StackLayout>
@@ -43,7 +44,7 @@
                 <StackLayout>
                     <Label
                         Style="{StaticResource PropertyNameLabelStyle}"
-                        Text="Air Humidty:"
+                        Text="{xct:Translate Air_humidity}"
                         TextColor="Gray" />
                     <microcharts:ChartView Chart="{Binding AirHumidityChart}" VerticalOptions="FillAndExpand" />
                 </StackLayout>
@@ -55,7 +56,7 @@
                 <StackLayout>
                     <Label
                         Style="{StaticResource PropertyNameLabelStyle}"
-                        Text="Air Temperature:"
+                        Text="{xct:Translate Air_temperature}"
                         TextColor="Gray" />
                     <microcharts:ChartView Chart="{Binding AirTemperatureChart}" VerticalOptions="FillAndExpand" />
                 </StackLayout>
@@ -67,7 +68,7 @@
                 <StackLayout>
                     <Label
                         Style="{StaticResource PropertyNameLabelStyle}"
-                        Text="Illuminance:"
+                        Text="{xct:Translate Illuminance}"
                         TextColor="Gray" />
                     <microcharts:ChartView Chart="{Binding IlluminanceChart}" VerticalOptions="FillAndExpand" />
                 </StackLayout>
@@ -79,7 +80,7 @@
                 <StackLayout>
                     <Label
                         Style="{StaticResource PropertyNameLabelStyle}"
-                        Text="CO2:"
+                        Text="{xct:Translate CO2}"
                         TextColor="Gray" />
                     <microcharts:ChartView Chart="{Binding CO2Chart}" VerticalOptions="FillAndExpand" />
                 </StackLayout>

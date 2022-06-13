@@ -18,6 +18,8 @@ namespace SmartAGSolutionApp.Data
 
         Greenhouse ActiveGreenhouse { get; set; }
 
+        LanguageSelectionType SelectedLanguage { get; set; }
+
         Guid FindGreenhouse(Guid id);
 
         void SetActiveGreenhouse(Greenhouse greenhouse);

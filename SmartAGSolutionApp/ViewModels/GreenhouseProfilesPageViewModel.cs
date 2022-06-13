@@ -2,9 +2,8 @@
 using Prism.Navigation;
 using SmartAGSolutionApp.Data;
 using SmartAGSolutionApp.Model;
-using System;
 using System.Collections.ObjectModel;
-using Xamarin.Forms;
+using Xamarin.CommunityToolkit.Helpers;
 
 namespace SmartAGSolutionApp.ViewModels
 {
@@ -20,12 +19,11 @@ namespace SmartAGSolutionApp.ViewModels
             this.navigationService = navigationService;
             this.dataProvider = dataProvider;
 
-            Title = "Select greenhouse profile";
+            Title = LocalizationResourceManager.Current.GetValue("Select_greenhouse_profile");
             this.GreenhouseCollection = this.dataProvider.GetGreenhouseCollection();
             this.AddGreenhouseProfilesCommand = new DelegateCommand(() => this.AddGreenhouse());
             this.DeleteSelectedGreenhouseProfileCommand = new DelegateCommand<string>((greenhouseName) => this.DeleteSelectedGreenhouseProfile(greenhouseName));
             this.ModifySelectedGreenhouseProfileCommand = new DelegateCommand<string>((id) => this.ModifySelectedGreenhouseProfile(id));
-
         }
 
         #region Properties
@@ -88,7 +86,6 @@ namespace SmartAGSolutionApp.ViewModels
         {
             var parameters = new NavigationParameters();
             parameters.Add("CanEdit", false);
-            parameters.Add("ButtonText", "Modify greenhouse profile");
             parameters.Add("ID", id);
             this.navigationService.NavigateAsync("GreenhouseProfilesAddPage", parameters);
         }
