@@ -5,6 +5,7 @@ using SmartAGSolutionApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Xamarin.CommunityToolkit.Helpers;
 using Xamarin.Forms;
 
 namespace SmartAGSolutionApp.ViewModels
@@ -14,7 +15,6 @@ namespace SmartAGSolutionApp.ViewModels
         private INavigationService navigationService;
         private IDataProvider dataProvider;
         private bool canEdit;
-        private string buttonText;
         private string newName;
         private string id;
 
@@ -24,7 +24,7 @@ namespace SmartAGSolutionApp.ViewModels
             this.navigationService = navigationService;
             this.dataProvider = dataProvider;
 
-            this.Title = this.ButtonText = "Add Greenhouse profile";
+            this.Title = string.Empty;
             this.CanEdit = true;
             this.id = string.Empty;
             AddGreenhouseProfileCommand = new DelegateCommand(() => AddGreenhouseProfile());
@@ -46,12 +46,6 @@ namespace SmartAGSolutionApp.ViewModels
             set { SetProperty(ref this.newName, value); }
         }
 
-        public string ButtonText
-        {
-            get { return this.buttonText; }
-            set { SetProperty(ref this.buttonText, value); }
-        }
-
         public string NewPhoneNumber { get; set; }
 
         public string NewDescription { get; set; }
@@ -70,7 +64,6 @@ namespace SmartAGSolutionApp.ViewModels
             {
                 this.id = parameters.GetValue<string>("ID");
                 this.CanEdit = parameters.GetValue<bool>("CanEdit");
-                this.ButtonText = this.Title = parameters.GetValue<string>("ButtonText");
                 Greenhouse greenhouse = this.dataProvider.GetGreenhouseCollection().First(g => g.ID == Guid.Parse(this.id));
                 this.NewName = greenhouse.Name;
                 this.NewPhoneNumber = greenhouse.PhoneNumber;
@@ -86,7 +79,7 @@ namespace SmartAGSolutionApp.ViewModels
         {
             if (string.IsNullOrEmpty(this.NewPhoneNumber) || string.IsNullOrEmpty(this.NewName))
             {
-                Application.Current.MainPage.DisplayAlert("Warning", "Name or phone number field cannot be emtpy", "Ok");
+                this.EmptyFieldsDisplayWarning();
                 return;
             }
 
@@ -94,7 +87,7 @@ namespace SmartAGSolutionApp.ViewModels
 
             if (this.canEdit && greenhousesNameCollection.Contains(this.NewName.Trim().ToLower()))
             {
-                Application.Current.MainPage.DisplayAlert("Warning", "Greenhouse profile with similar name already exists.", "Ok");
+                this.GreenhouseProfileSimilarNameDisplayWarning();
                 return;
             }
             else if (this.canEdit)
@@ -106,6 +99,22 @@ namespace SmartAGSolutionApp.ViewModels
             }
 
             this.navigationService.GoBackAsync();
+        }
+
+        private void GreenhouseProfileSimilarNameDisplayWarning()
+        {
+            string titleMessage = LocalizationResourceManager.Current.GetValue("Warning");
+            string message = LocalizationResourceManager.Current.GetValue("Greenhouse_profile_with_similar_name_already_exists");
+            string cancelMessage = LocalizationResourceManager.Current.GetValue("OK");
+            Application.Current.MainPage?.DisplayAlert(titleMessage, message, cancelMessage);
+        }
+
+        private void EmptyFieldsDisplayWarning()
+        {
+            string titleMessage = LocalizationResourceManager.Current.GetValue("Warning");
+            string message = LocalizationResourceManager.Current.GetValue("Name_or_phone_number_field_cannot_be_emtpy");
+            string cancelMessage = LocalizationResourceManager.Current.GetValue("OK");
+            Application.Current.MainPage?.DisplayAlert(titleMessage, message, cancelMessage);
         }
     }
 }

@@ -4,7 +4,8 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodels="clr-namespace:SmartAGSolutionApp.ViewModels"
-    Title="{Binding Title}"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    Title="{xct:Translate Greenhouse_profile}"
     x:DataType="viewmodels:GreenhouseProfilesAddPageViewModel">
     <ContentPage.Content>
         <Grid>
@@ -18,31 +19,31 @@
                     Padding="30,24,30,24"
                     Orientation="Vertical"
                     Spacing="10">
-                    <Label FontSize="Title" Text="Name:" />
+                    <Label FontSize="Title" Text="{xct:Translate Name}" />
                     <Entry
                         x:Name="name"
                         ClearButtonVisibility="WhileEditing"
                         IsEnabled="{Binding CanEdit}"
-                        Placeholder="Enter greenhouse name"
+                        Placeholder="{xct:Translate Enter_greenhouse_name}"
                         Text="{Binding NewName, Mode=TwoWay}" />
-                    <Label FontSize="Title" Text="Phone number:" />
+                    <Label FontSize="Title" Text="{xct:Translate Phone_number}" />
                     <Entry
                         x:Name="phoneNumber"
                         ClearButtonVisibility="WhileEditing"
                         IsEnabled="True"
-                        Placeholder="Enter greenhouse phone number"
+                        Placeholder="{xct:Translate Enter_greenhouse_phone_number}"
                         Text="{Binding NewPhoneNumber, Mode=TwoWay}" />
-                    <Label FontSize="Title" Text="Description:" />
+                    <Label FontSize="Title" Text="{xct:Translate Description}" />
                     <Entry
                         x:Name="description"
                         ClearButtonVisibility="WhileEditing"
-                        Placeholder="Enter description"
+                        Placeholder="{xct:Translate Enter_description}"
                         Text="{Binding NewDescription, Mode=TwoWay}" />
                     <Button
                         Margin="0,10,0,0"
                         BackgroundColor="{StaticResource Primary}"
                         Command="{Binding AddGreenhouseProfileCommand}"
-                        Text="{Binding ButtonText}"
+                        Text="{xct:Translate Apply}"
                         TextColor="White" />
                 </StackLayout>
             </ScrollView>

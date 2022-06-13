@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,6 +11,18 @@ namespace SmartAGSolutionApp.Views
         public SettingsPage()
         {
             this.InitializeComponent();
+        }
+
+        private void ImgbtnSerbianFlag_Clicked(object sender, EventArgs e)
+        {
+            this.fSerbianFlag.BackgroundColor = Color.Silver;
+            this.fUSAFlag.BackgroundColor = Color.White;
+        }
+
+        private void ImgbtnUSAFlag_Clicked(object sender, EventArgs e)
+        {
+            this.fSerbianFlag.BackgroundColor = Color.White;
+            this.fUSAFlag.BackgroundColor = Color.Silver;
         }
     }
 }

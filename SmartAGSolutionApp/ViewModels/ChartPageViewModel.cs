@@ -1,11 +1,6 @@
 ﻿using Microcharts;
 using Prism.Navigation;
-using SkiaSharp;
 using SmartAGSolutionApp.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SmartAGSolutionApp.ViewModels
 {
@@ -14,7 +9,7 @@ namespace SmartAGSolutionApp.ViewModels
         public ChartPageViewModel(INavigationService navigationService, IDataProvider dataProvider)
             : base(navigationService, dataProvider)
         {
-            Title = "Measurements overview";
+            Title = string.Empty;
 
             TemperatureChart = new LineChart()
             {

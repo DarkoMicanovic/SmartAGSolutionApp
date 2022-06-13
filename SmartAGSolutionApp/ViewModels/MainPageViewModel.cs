@@ -1,13 +1,10 @@
 ﻿using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
 using SmartAGSolutionApp.Data;
 using SmartAGSolutionApp.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
+using Xamarin.CommunityToolkit.Helpers;
 using Xamarin.Forms;
 
 namespace SmartAGSolutionApp.ViewModels
@@ -21,14 +18,17 @@ namespace SmartAGSolutionApp.ViewModels
         {
             this.navigationService = navigationService;
 
-            this.Title = "Smart AG Solution";
+            this.Title = string.Empty;
             this.GetLatestMeasurementCommand = new DelegateCommand(() => GetLatestMeasurements());
             this.ListLatestMeasurementsCommand = new DelegateCommand(() => ListLatestMeasurements());
             this.GreenhouseProfilesCommand = new DelegateCommand(() => GreenhouseProfiles());
             this.SettingsCommand = new DelegateCommand(() => Settings());
+            this.SetApplicationLanguage();
         }
 
         #region Properties
+
+        public string ButtonGetLatestMeasurements { get; set; }
 
         public DelegateCommand GreenhouseProfilesCommand { get; set; }
 
@@ -44,7 +44,7 @@ namespace SmartAGSolutionApp.ViewModels
         {
             if (this.DataProvider.ActiveGreenhouse.ID == default)
             {
-                Application.Current.MainPage?.DisplayAlert("Information", "Greenhouse profile is not selected.", "Ok");
+                this.GreenhouseProfileIsNotSelectedDisplayWarning();
                 return;
             }
 
@@ -61,14 +61,29 @@ namespace SmartAGSolutionApp.ViewModels
             await this.navigationService.NavigateAsync("HistoryPage", parameters);
         }
 
+        private void SetApplicationLanguage()
+        {
+            if (this.DataProvider.SelectedLanguage == LanguageSelectionType.Serbian)
+                LocalizationResourceManager.Current.CurrentCulture = new CultureInfo("sr");
+        }
+
         private void ListLatestMeasurements()
         {
             if (this.DataProvider.ActiveGreenhouse.ID == default)
             {
-                Application.Current.MainPage?.DisplayAlert("Information", "Greenhouse profile is not selected.", "Ok");
+                this.GreenhouseProfileIsNotSelectedDisplayWarning();
                 return;
             }
+
             this.navigationService.NavigateAsync("HistoryPage");
+        }
+
+        private void GreenhouseProfileIsNotSelectedDisplayWarning()
+        {
+            string titleMessage = LocalizationResourceManager.Current.GetValue("Information");
+            string message = LocalizationResourceManager.Current.GetValue("Greenhouse_profile_is_not_selected");
+            string cancelMessage = LocalizationResourceManager.Current.GetValue("OK");
+            Application.Current.MainPage?.DisplayAlert(titleMessage, message, cancelMessage);
         }
 
         private void GreenhouseProfiles()

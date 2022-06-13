@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodels="clr-namespace:SmartAGSolutionApp.ViewModels"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     x:Name="ProfilesView"
     Title="{Binding Title}">
     <ContentPage.ToolbarItems>
@@ -21,11 +22,11 @@
                         <MenuItem
                             Command="{Binding Source={x:Reference ProfilesView}, Path=BindingContext.DeleteSelectedGreenhouseProfileCommand}"
                             CommandParameter="{Binding Name}"
-                            Text="Delete" />
+                            Text="{xct:Translate Delete}" />
                         <MenuItem
                             Command="{Binding Source={x:Reference ProfilesView}, Path=BindingContext.ModifySelectedGreenhouseProfileCommand}"
                             CommandParameter="{Binding IDString}"
-                            Text="Modify" />
+                            Text="{xct:Translate Modify}" />
                     </ViewCell.ContextActions>
                     <Grid Padding="7">
                         <StackLayout Orientation="Horizontal">
